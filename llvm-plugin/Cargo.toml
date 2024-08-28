@@ -54,7 +54,7 @@ target-riscv = ["inkwell/target-riscv"]
 target-all = ["inkwell/target-all"]
 
 [dependencies]
-inkwell = { git = "https://github.com/kor-and-m/inkwell.git }
+inkwell = { git = "https://github.com/kor-and-m/inkwell.git" }
 inkwell_internals = "0.10.0"
 llvm-plugin-macros = { path = "../llvm-plugin-macros", version = "0.2", optional = true }
 
