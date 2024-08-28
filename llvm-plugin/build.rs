@@ -99,7 +99,6 @@ mod llvm_sys {
             .map(|p| PathBuf::from(p).join("bin"))
             .unwrap_or_default();
 
-        panic!("---{:?}", prefix);
         for binary_name in llvm_config_binary_names() {
             let binary_name = prefix.join(binary_name);
             match llvm_version(&binary_name) {
