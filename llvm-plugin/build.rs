@@ -1,13 +1,13 @@
 fn main() {
-    // println!("cargo::rustc-check-cfg=cfg(LLVM_NOT_FOUND)");
+    println!("cargo::rustc-check-cfg=cfg(LLVM_NOT_FOUND)");
 
     let (major, minor) = *llvm_sys::LLVM_VERSION_FROM_FEATURES;
     println!("cargo:rustc-env=LLVM_VERSION_MAJOR={}{}", major, minor);
 
-    // if llvm_sys::LLVM_CONFIG_PATH.is_none() {
-    //     println!("cargo:rustc-cfg=LLVM_NOT_FOUND");
-    //     return;
-    // }
+    if llvm_sys::LLVM_CONFIG_PATH.is_none() {
+        println!("cargo:rustc-cfg=LLVM_NOT_FOUND");
+        return;
+    }
 
     let includedir = llvm_sys::llvm_config("--includedir");
 
@@ -98,6 +98,8 @@ mod llvm_sys {
         let prefix = env::var_os(&*ENV_LLVM_PREFIX)
             .map(|p| PathBuf::from(p).join("bin"))
             .unwrap_or_default();
+
+        panic!("{}", prefix);
         for binary_name in llvm_config_binary_names() {
             let binary_name = prefix.join(binary_name);
             match llvm_version(&binary_name) {
