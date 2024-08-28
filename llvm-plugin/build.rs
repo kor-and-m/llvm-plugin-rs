@@ -4,10 +4,10 @@ fn main() {
     let (major, minor) = *llvm_sys::LLVM_VERSION_FROM_FEATURES;
     println!("cargo:rustc-env=LLVM_VERSION_MAJOR={}{}", major, minor);
 
-    if llvm_sys::LLVM_CONFIG_PATH.is_none() {
-        println!("cargo:rustc-cfg=LLVM_NOT_FOUND");
-        return;
-    }
+    // if llvm_sys::LLVM_CONFIG_PATH.is_none() {
+    //     println!("cargo:rustc-cfg=LLVM_NOT_FOUND");
+    //     return;
+    // }
 
     let includedir = llvm_sys::llvm_config("--includedir");
 
